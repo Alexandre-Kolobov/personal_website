@@ -21,6 +21,9 @@ class Developer(models.Model):
         last_name (CharField): Last name of developer.
         photo (ImageField): Picture of developer.
 
+    Methods:
+        __str__(): Returns a string representation of the profile
+
     """
 
     birthday = models.DateField()
@@ -28,3 +31,7 @@ class Developer(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     photo = models.ImageField(blank=True)
+
+    def __str__(self):
+        return (f'{self.first_name} {self.last_name}')
+

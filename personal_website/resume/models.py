@@ -24,11 +24,17 @@ class Contact(models.Model):
         type_of_contact (CharField): The type of contact.
         description (TextField): The contact description or link.
         developer (ForeignKey): The id of associated developer.
+
+    Methods:
+        __str__(): Returns a string representation of the contact.
     """
 
     type_of_contact = models.CharField(max_length=100)
     description = models.TextField()
     developer = models.ForeignKey(Developer, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return (f'{self.developer.first_name} {self.developer.last_name}: {self.type_of_contact}')
 
 
 class Experience_pro(models.Model):
@@ -42,14 +48,29 @@ class Experience_pro(models.Model):
         end_year (DateField): When the developer ended to work. Leave blank if still working there.
         description (TextField): The work description.
         developer (ForeignKey): The id of associated developer.
+
+    Methods:
+        __str__(): Returns a string representation of the working experience.
     """
 
     company_name = models.CharField(max_length=100)
     position = models.CharField(max_length=100)
     start_year = models.DateField()
-    end_year = models.DateField(blank=True)
+    end_year = models.DateField(blank=True, null=True)
     description = models.TextField(blank=True)
     developer = models.ForeignKey(Developer, on_delete=models.CASCADE)
+
+    def __str__(self):
+        if self.end_year:
+            return (
+                f'{self.developer.first_name} {self.developer.last_name}: '
+                f'{self.company_name} - {self.position} ({self.start_year} - {self.end_year})'
+                    )
+        else:
+            return (
+                f'{self.developer.first_name} {self.developer.last_name}: '
+                f'{self.company_name} - {self.position} ({self.start_year} - today)'
+                    )
 
 
 class Technical_skill(models.Model):
@@ -60,11 +81,18 @@ class Technical_skill(models.Model):
         name (CharField): Name of group of skills.
         description (TextField): The skills description.
         developer (ForeignKey): The id of associated developer.
+
+    Methods:
+        __str__(): Returns a string representation of the technical skill.
     """
 
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
     developer = models.ForeignKey(Developer, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return (f'{self.developer.first_name} {self.developer.last_name}: {self.name}')
+
 
 
 class Education(models.Model):
@@ -78,14 +106,29 @@ class Education(models.Model):
         end_year (DateField): When the developer ended to study. Leave blank if still studying there.
         description (TextField): The studies description.
         developer (ForeignKey): The id of associated developer.
+
+    Methods:
+        __str__(): Returns a string representation of education.
     """
 
     university_name = models.CharField(max_length=100)
     diploma_name = models.CharField(max_length=100)
     start_year = models.DateField()
-    end_year = models.DateField(blank=True)
+    end_year = models.DateField(blank=True, null=True)
     description = models.TextField(blank=True)
     developer = models.ForeignKey(Developer, on_delete=models.CASCADE)
+
+    def __str__(self):
+        if self.end_year:
+            return (
+                f'{self.developer.first_name} {self.developer.last_name}: '
+                f'{self.university_name} - {self.diploma_name} ({self.start_year} - {self.end_year})'
+                    )
+        else:
+            return (
+                f'{self.developer.first_name} {self.developer.last_name}: '
+                f'{self.university_name} - {self.diploma_name} ({self.start_year} - today)'
+                    )
 
 
 class Personal_skill(models.Model):
@@ -95,10 +138,18 @@ class Personal_skill(models.Model):
     Attributes:
         name (CharField): Name of skill.
         developer (ForeignKey): The id of associated developer.
+
+    Methods:
+        __str__(): Returns a string representation of personal skill.
     """
 
     name = models.CharField(max_length=100)
     developer = models.ForeignKey(Developer, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return (f'{self.developer.first_name} {self.developer.last_name}: {self.name}')
+
+
 
 
 class Interest(models.Model):
@@ -108,10 +159,16 @@ class Interest(models.Model):
     Attributes:
         name (CharField): Name of interest.
         developer (ForeignKey): The id of associated developer.
+
+    Methods:
+        __str__(): Returns a string representation of interests.
     """
 
     name = models.CharField(max_length=100)
     developer = models.ForeignKey(Developer, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return (f'{self.developer.first_name} {self.developer.last_name}: {self.name}')
 
 
 class Language(models.Model):
@@ -122,6 +179,9 @@ class Language(models.Model):
         name (CharField): Language.
         level(CharField): Language level choices.
         developer (ForeignKey): The id of associated developer.
+
+    Methods:
+        __str__(): Returns a string representation of language.
     """
 
     LEVEL_CHOICES = [
@@ -133,3 +193,6 @@ class Language(models.Model):
     name = models.CharField(max_length=100)
     level = models.CharField(max_length=100, choices=LEVEL_CHOICES)
     developer = models.ForeignKey(Developer, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return (f'{self.developer.first_name} {self.developer.last_name}: {self.name} ({self.level})')

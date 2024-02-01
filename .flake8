@@ -1,0 +1,10 @@
+[flake8]
+max-line-length = 135
+exclude =
+    .git,
+    docs,
+	flake8-report,
+	htmlcov,
+	.vscode,
+	venv,
+	.pytest_cache,

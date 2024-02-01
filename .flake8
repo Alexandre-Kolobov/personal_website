@@ -8,3 +8,4 @@ exclude =
 	.vscode,
 	venv,
 	.pytest_cache,
+    **/migrations/*

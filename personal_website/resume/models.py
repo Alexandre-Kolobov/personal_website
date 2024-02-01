@@ -22,12 +22,12 @@ class Contact(models.Model):
 
     Attributes:
         type_of_contact (CharField): The type of contact.
-        description (CharField): The contact description or link.
+        description (TextField): The contact description or link.
         developer (ForeignKey): The id of associated developer.
     """
 
-    type_of_contact = models.CharField()
-    description = models.CharField()
+    type_of_contact = models.CharField(max_length=100)
+    description = models.TextField()
     developer = models.ForeignKey(Developer, on_delete=models.CASCADE)
 
 
@@ -40,15 +40,15 @@ class Experience_pro(models.Model):
         position (CharField): Position of the developer.
         start_year (DateField): When the developer started to work.
         end_year (DateField): When the developer ended to work. Leave blank if still working there.
-        description (CharField): The work description.
+        description (TextField): The work description.
         developer (ForeignKey): The id of associated developer.
     """
 
-    company_name = models.CharField()
-    position = models.CharField()
+    company_name = models.CharField(max_length=100)
+    position = models.CharField(max_length=100)
     start_year = models.DateField()
     end_year = models.DateField(blank=True)
-    description = models.CharField()
+    description = models.TextField(blank=True)
     developer = models.ForeignKey(Developer, on_delete=models.CASCADE)
 
 
@@ -58,12 +58,12 @@ class Technical_skill(models.Model):
 
     Attributes:
         name (CharField): Name of group of skills.
-        description (CharField): The skills description.
+        description (TextField): The skills description.
         developer (ForeignKey): The id of associated developer.
     """
 
-    name = models.CharField()
-    description = models.CharField(blank=True)
+    name = models.CharField(max_length=100)
+    description = models.TextField(blank=True)
     developer = models.ForeignKey(Developer, on_delete=models.CASCADE)
 
 
@@ -76,15 +76,15 @@ class Education(models.Model):
         diploma_name (CharField): Name of diploma.
         start_year (DateField): When the developer started to study.
         end_year (DateField): When the developer ended to study. Leave blank if still studying there.
-        description (CharField): The studies description.
+        description (TextField): The studies description.
         developer (ForeignKey): The id of associated developer.
     """
 
-    university_name = models.CharField()
-    diploma_name = models.CharField()
+    university_name = models.CharField(max_length=100)
+    diploma_name = models.CharField(max_length=100)
     start_year = models.DateField()
     end_year = models.DateField(blank=True)
-    description = models.CharField()
+    description = models.TextField(blank=True)
     developer = models.ForeignKey(Developer, on_delete=models.CASCADE)
 
 
@@ -97,7 +97,7 @@ class Personal_skill(models.Model):
         developer (ForeignKey): The id of associated developer.
     """
 
-    name = models.CharField()
+    name = models.CharField(max_length=100)
     developer = models.ForeignKey(Developer, on_delete=models.CASCADE)
 
 
@@ -110,7 +110,7 @@ class Interest(models.Model):
         developer (ForeignKey): The id of associated developer.
     """
 
-    name = models.CharField()
+    name = models.CharField(max_length=100)
     developer = models.ForeignKey(Developer, on_delete=models.CASCADE)
 
 
@@ -119,7 +119,7 @@ class Language(models.Model):
     A class to represent an language of developer.
 
     Attributes:
-        name (CharField): Name of interest.
+        name (CharField): Language.
         level(CharField): Language level choices.
         developer (ForeignKey): The id of associated developer.
     """
@@ -130,6 +130,6 @@ class Language(models.Model):
         ('bilingual', 'Bilingual'),
     ]
 
-    name = models.CharField()
-    level = models.CharField(choices=LEVEL_CHOICES)
+    name = models.CharField(max_length=100)
+    level = models.CharField(max_length=100, choices=LEVEL_CHOICES)
     developer = models.ForeignKey(Developer, on_delete=models.CASCADE)

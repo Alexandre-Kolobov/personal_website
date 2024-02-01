@@ -1,3 +1,10 @@
-from django.contrib import admin
+"""
+Registering models with the Django admin.
+Registered models can be managed and viewed through the admin interface.
 
-# Register your models here.
+"""
+
+from django.contrib import admin
+from .models import Developer
+
+admin.site.register(Developer)

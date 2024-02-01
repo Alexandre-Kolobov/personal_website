@@ -16,7 +16,7 @@ class Developer(models.Model):
 
     Attributes:
         birthday (DateField): Birthday date of developer.
-        intro (CharField): Short introduction of developer.
+        intro (TextField): Short introduction of developer.
         first_name (CharField): First name of developer.
         last_name (CharField): Last name of developer.
         photo (ImageField): Picture of developer.
@@ -24,7 +24,7 @@ class Developer(models.Model):
     """
 
     birthday = models.DateField()
-    intro = models.CharField(blank=True)
-    first_name = models.CharField()
-    last_name = models.CharField()
+    intro = models.TextField(blank=True)
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
     photo = models.ImageField(blank=True)

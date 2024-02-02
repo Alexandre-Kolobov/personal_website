@@ -7,6 +7,9 @@ Classes:
 """
 
 from django.db import models
+from PIL import Image
+import os
+from django.conf import settings
 
 
 class Developer(models.Model):
@@ -35,3 +38,20 @@ class Developer(models.Model):
     def __str__(self):
         return (f'{self.first_name} {self.last_name}')
 
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        if self.photo:
+            file_path = os.path.join(settings.MEDIA_ROOT, str(self.photo))
+            img = Image.open(file_path)
+            target_size = (300, 300)
+            img.thumbnail(target_size, Image.LANCZOS)
+            img.save(self.photo.path)
+
+        super().save(*args, **kwargs)
+
+    def delete(self):
+        if self.photo:
+            file_path = os.path.join(settings.MEDIA_ROOT, str(self.photo))
+            if os.path.exists(file_path):
+                os.remove(file_path)
+        return super().delete()

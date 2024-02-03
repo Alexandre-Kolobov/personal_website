@@ -26,6 +26,8 @@ class Developer(models.Model):
 
     Methods:
         __str__(): Returns a string representation of the profile
+        save(): Overwrite save method to include image resizing
+        delete(): Overwrite delete method to include image removing when model is removed
 
     """
 

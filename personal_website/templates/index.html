@@ -1,10 +1,60 @@
 <!DOCTYPE html>
+
 <html lang="en">
     <head>
         <title>{{developer.first_name}} {{developer.last_name}}</title>
     </head>
     <body>
-        <h1>{{developer.intro}}</h1>
+        <h1>Hello and welcome on my personal web page!</h1>
+        <p>{{developer.intro}}</p>
         <img src="{{developer.photo.url}}" alt="my photo">
+        <ul>
+            <h1>Contact information:</h1>
+            {% for contact in contacts %}
+                <li>{{contact.type_of_contact}}: {{contact.description}}</li>
+            {% endfor %}
+        </ul>
+        <ul>
+            <h1>Professional experience:</h1>
+            {% for experince_pro in experinces_pro %}
+                <li>Company: {{experince_pro.company_name}}</li>
+                <li>Position: {{experince_pro.position}} - from {{experince_pro.start_year}} to {{experince_pro.end_year}}</li>
+                <li>Description: {{experince_pro.description}}</li>
+                <br>
+            {% endfor %}
+        </ul>
+        <ul>
+            <h1>Technical skills:</h1>
+            {% for technical_skill in technical_skills %}
+                <li>{{technical_skill.name}}: {{technical_skill.description}}</li>
+            {% endfor %}
+        </ul>
+        <ul>
+            <h1>Education:</h1>
+            {% for education in educations %}
+                <li>University name: {{education.university_name}}</li>
+                <li>Diploma: {{education.diploma_name}} - from {{education.start_year}} to {{education.end_year}}</li>
+                <li>Description: {{education.description}}</li>
+                <br>
+            {% endfor %}
+        </ul>
+        <ul>
+            <h1>Personal skills:</h1>
+            {% for personal_skill in personal_skills %}
+                <li>{{personal_skill.name}}</li>
+            {% endfor %}
+        </ul>
+        <ul>
+            <h1>Interests:</h1>
+            {% for interest in interests %}
+                <li>{{interest.name}}</li>
+            {% endfor %}
+        </ul>
+        <ul>
+            <h1>Languages:</h1>
+            {% for language in languages %}
+                <li>{{language.name}}: {{language.level}}</li>
+            {% endfor %}
+        </ul>
     </body>
 </html>

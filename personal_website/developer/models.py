@@ -36,6 +36,8 @@ class Developer(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     photo = models.ImageField(blank=True)
+    role = models.CharField(max_length=100, null=True)
+    cv_file = models.FileField(upload_to="uploads/", blank=True)
 
     def __str__(self):
         return (f'{self.first_name} {self.last_name}')

@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@iconscout/unicons@4.0.8/css/line.min.css">
         <link rel="shortcut icon" href="{%  static 'favicon.ico' %}">
+        <link rel="stylesheet" href="{% static 'styles.css' %}">
     </head>
     <body>
 
@@ -29,10 +30,10 @@
                             <a href="#about" class="nav-link">About</a>
                             <div class="circle"></div>
                         </li>
-                        <li class="nav_list">
+                        <!-- <li class="nav_list">
                             <a href="#projects" class="nav-link">Projects</a>
                             <div class="circle"></div>
-                        </li>
+                        </li> -->
                         <li class="nav_list">
                             <a href="#contact" class="nav-link">Contact</a>
                             <div class="circle"></div>
@@ -65,9 +66,9 @@
                             </span>
                         </div>
                         <div class="text-info">
-                            <p>{{developer.intro}}</p>
+                            <p>A completer</p>
                         </div>
-                        <div class="txt-btn">
+                        <div class="text-btn">
                             <button class="btn hire-btn">Hire me</button>
                             <button class="btn">Download CV<i class="uil uil-file"></i></button>
                         </div>
@@ -104,38 +105,68 @@
                         <div class="col">
                             <div class="about-info">
                                 <figure class="about-me">
-                                    <img src="" alt="" class="profile">
-                                    <h2>Web dev</h2>
-                                    <p>My name is Alex! I'm python dev</p>
+                                    <img src="{{developer.photo.url}}" alt="my photo" class="profile">
+                                    <h2>{{developer.role}}</h2>
+                                    <p>{{developer.intro}}</p>
                                 </figure>
                                 <button class="about-me-btn">Hire me</button>
                             </div>
                         </div>
                         <div class="skill">
                             <div class="skill-box">
-                                <span class="title">HTML</span>
-                                <div class="skill-bar">
-                                    <span class="skill-per html">
-                                        <span class="tool-tip">80%</span>
-                                    </span>
-                                </div>
+                                <ul>
+                                    <h1 class="title">Technical skills:</h1>
+                                    {% for technical_skill in technical_skills %}
+                                        <li>{{technical_skill.name}}: {{technical_skill.description}}</li>
+                                    {% endfor %}
+                                </ul>
+                                <ul>
+                                    <h1 class="title">Soft skills:</h1>
+                                    {% for personal_skill in personal_skills %}
+                                        <li>{{personal_skill.name}}</li>
+                                    {% endfor %}
+                                </ul>
+                                <ul>
+                                    <h1 class="title">Interests:</h1>
+                                    {% for interest in interests %}
+                                        <li>{{interest.name}}</li>
+                                    {% endfor %}
+                                </ul>
+                                <ul>
+                                    <h1 class="title">Languages:</h1>
+                                    {% for language in languages %}
+                                        <li>{{language.name}}: {{language.level}}</li>
+                                    {% endfor %}
+                                </ul>
                             </div>
                         </div>
-                        <div class="skill">
-                            <div class="skill-box">
-                                <span class="title">PYTHON</span>
-                                <div class="skill-bar">
-                                    <span class="skill-per python">
-                                        <span class="tool-tip">80%</span>
-                                    </span>
-                                </div>
+                        <div class="experience">
+                            <div class="experience-box">
+                                <ul>
+                                    <h1 class="title">Professional experience:</h1>
+                                    {% for experince_pro in experinces_pro %}
+                                        <li>Company: {{experince_pro.company_name}}</li>
+                                        <li>Position: {{experince_pro.position}} - from {{experince_pro.start_year}} to {{experince_pro.end_year}}</li>
+                                        <li>Description: {{experince_pro.description}}</li>
+                                        <br>
+                                    {% endfor %}
+                                </ul>
+                                <ul>
+                                    <h1 class="title">Education:</h1>
+                                    {% for education in educations %}
+                                        <li>University name: {{education.university_name}}</li>
+                                        <li>Diploma: {{education.diploma_name}} - from {{education.start_year}} to {{education.end_year}}</li>
+                                        <li>Description: {{education.description}}</li>
+                                        <br>
+                                    {% endfor %}
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </section>
 
                 <!--Project box-->
-                <section class="section" id="Projects">
+                <!-- <section class="section" id="Projects">
                     <div class="project-box">
                         <i class="uil uil-briefcase-alt"></i>
                         <h3>Completed</h3>
@@ -146,7 +177,7 @@
                         <h3>Experience</h3>
                         <label>2 and en python</label>
                     </div>
-                </section>
+                </section> -->
 
                 <!--Contact box-->
                 <section class="section" id="contact">
@@ -176,60 +207,6 @@
                         </div>
                     </div>
                 </section>
-
-                <section class="test">
-                    <h1>Hello and welcome on my personal web page!</h1>
-                    <p>{{developer.intro}}</p>
-                    <img src="{{developer.photo.url}}" alt="my photo" id="test">
-                    <ul>
-                        <h1>Contact information:</h1>
-                        {% for contact in contacts %}
-                            <li>{{contact.type_of_contact}}: {{contact.description}}</li>
-                        {% endfor %}
-                    </ul>
-                    <ul>
-                        <h1>Professional experience:</h1>
-                        {% for experince_pro in experinces_pro %}
-                            <li>Company: {{experince_pro.company_name}}</li>
-                            <li>Position: {{experince_pro.position}} - from {{experince_pro.start_year}} to {{experince_pro.end_year}}</li>
-                            <li>Description: {{experince_pro.description}}</li>
-                            <br>
-                        {% endfor %}
-                    </ul>
-                    <ul>
-                        <h1>Technical skills:</h1>
-                        {% for technical_skill in technical_skills %}
-                            <li>{{technical_skill.name}}: {{technical_skill.description}}</li>
-                        {% endfor %}
-                    </ul>
-                    <ul>
-                        <h1>Education:</h1>
-                        {% for education in educations %}
-                            <li>University name: {{education.university_name}}</li>
-                            <li>Diploma: {{education.diploma_name}} - from {{education.start_year}} to {{education.end_year}}</li>
-                            <li>Description: {{education.description}}</li>
-                            <br>
-                        {% endfor %}
-                    </ul>
-                    <ul>
-                        <h1>Personal skills:</h1>
-                        {% for personal_skill in personal_skills %}
-                            <li>{{personal_skill.name}}</li>
-                        {% endfor %}
-                    </ul>
-                    <ul>
-                        <h1>Interests:</h1>
-                        {% for interest in interests %}
-                            <li>{{interest.name}}</li>
-                        {% endfor %}
-                    </ul>
-                    <ul>
-                        <h1>Languages:</h1>
-                        {% for language in languages %}
-                            <li>{{language.name}}: {{language.level}}</li>
-                        {% endfor %}
-                    </ul>
-                </section>
             </main>
 
             <!--Footer-->
@@ -257,12 +234,9 @@
                     <div class="icon"><i class="uil uil-envelope-alt"></i></div>
                 </div>
                 <div class="bottom-footer">
-                    <p>&copy; 2024 Alex</p>
+                    <p>&copy; 2024 {{developer.first_name}} {{developer.last_name}}</p>
                 </div>
             </footer>
-
         </div>
-
-        
     </body>
 </html>

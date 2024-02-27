@@ -57,8 +57,8 @@
                 <section class="featured-box">
                     <div class="featured-text">
                         <div class="hello">
-                            <h1>Hello and welcome</h1>
-                            <p>I'm </p>
+                            <h1>Hello I'm</h1>
+                            <p>Web developer</p>
                         </div>
                         <div class="featured-name">
                             <span class="typedText">
@@ -66,7 +66,7 @@
                             </span>
                         </div>
                         <div class="text-info">
-                            <p>A completer</p>
+                            <p>My name is Alexandre! I'm web developer specializing in Python and Django.</p>
                         </div>
                         <div class="text-btn">
                             <button class="btn hire-btn">Hire me</button>
@@ -105,6 +105,7 @@
                         <div class="col">
                             <div class="about-info">
                                 <figure class="about-me">
+                                    <figcaption>
                                     <img src="{{developer.photo.url}}" alt="my photo" class="profile">
                                     <h2>{{developer.role}}</h2>
                                     <p>{{developer.intro}}</p>
@@ -127,19 +128,21 @@
                                     {% endfor %}
                                 </ul>
                                 <ul>
-                                    <h1 class="title">Interests:</h1>
-                                    {% for interest in interests %}
-                                        <li>{{interest.name}}</li>
-                                    {% endfor %}
-                                </ul>
-                                <ul>
                                     <h1 class="title">Languages:</h1>
                                     {% for language in languages %}
                                         <li>{{language.name}}: {{language.level}}</li>
                                     {% endfor %}
                                 </ul>
+                                <ul>
+                                    <h1 class="title">Interests:</h1>
+                                    {% for interest in interests %}
+                                        <li>{{interest.name}}</li>
+                                    {% endfor %}
+                                </ul>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="experience">
                             <div class="experience-box">
                                 <ul>
@@ -151,16 +154,18 @@
                                         <br>
                                     {% endfor %}
                                 </ul>
-                                <ul>
-                                    <h1 class="title">Education:</h1>
-                                    {% for education in educations %}
-                                        <li>University name: {{education.university_name}}</li>
-                                        <li>Diploma: {{education.diploma_name}} - from {{education.start_year}} to {{education.end_year}}</li>
-                                        <li>Description: {{education.description}}</li>
-                                        <br>
-                                    {% endfor %}
-                                </ul>
                             </div>
+                        </div>
+                        <div class="education">
+                            <ul>
+                                <h1 class="title">Education:</h1>
+                                {% for education in educations %}
+                                    <li>University name: {{education.university_name}}</li>
+                                    <li>Diploma: {{education.diploma_name}} - from {{education.start_year}} to {{education.end_year}}</li>
+                                    <li>Description: {{education.description|linebreaks}}</li>
+                                    <br>
+                                {% endfor %}
+                            </ul>
                         </div>
                     </div>
                 </section>
@@ -194,16 +199,17 @@
                         </div>
                         <div class="col">
                             <div class="form-control">
-                                <input type="text" class="input-field" placeholder="Your name">
-                                <input type="text" class="input-field" placeholder="Your email">
-                            </div>
-                            <div class="text-area">
-                                <input type="text" class="input-subject" placeholder="Subject">
-                                <textarea placeholder="Message"></textarea>
-                            </div>
-                            <div class="form-button">
-                                <button class="btn">Send <i class="uil uil-message"></i></button>
-                            </div>
+                                <div class="form-inputs">
+                                    <input type="text" class="input-field" placeholder="Your name">
+                                    <input type="text" class="input-field" placeholder="Your email">
+                                </div>
+                                <div class="text-area">
+                                    <input type="text" class="input-subject" placeholder="Subject">
+                                    <textarea placeholder="Message"></textarea>
+                                </div>
+                                <div class="form-button">
+                                    <button class="btn">Send <i class="uil uil-message"></i></button>
+                                </div>
                         </div>
                     </div>
                 </section>

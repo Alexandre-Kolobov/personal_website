@@ -47,7 +47,7 @@ class Developer(models.Model):
         if self.photo:
             file_path = os.path.join(settings.MEDIA_ROOT, str(self.photo))
             img = Image.open(file_path)
-            target_size = (300, 300)
+            target_size = (444, 562)
             img.thumbnail(target_size, Image.LANCZOS)
             img.save(self.photo.path)
 

@@ -118,7 +118,7 @@
                                 <ul>
                                     <h1 class="title">Technical skills:</h1>
                                     {% for technical_skill in technical_skills %}
-                                        <li>{{technical_skill.name}}: {{technical_skill.description}}</li>
+                                        <li><strong>{{technical_skill.name}}</strong>: {{technical_skill.description}}</li>
                                     {% endfor %}
                                 </ul>
                                 <ul>
@@ -148,9 +148,10 @@
                                 <ul>
                                     <h1 class="title">Professional experience:</h1>
                                     {% for experince_pro in experinces_pro %}
-                                        <li>Company: {{experince_pro.company_name}}</li>
-                                        <li>Position: {{experince_pro.position}} - from {{experince_pro.start_year}} to {{experince_pro.end_year}}</li>
-                                        <li>Description: {{experince_pro.description}}</li>
+                                        <li><strong>Company</strong>: {{experince_pro.company_name}}</li>
+                                        <li><strong>Position</strong>: {{experince_pro.position}} - from {{experince_pro.start_year}} to {{experince_pro.end_year}}</li>
+                                        <li><strong>Description</strong>:</li>
+                                        <li class="description"><pre>{{experince_pro.description|linebreaksbr}}</pre></li>
                                         <br>
                                     {% endfor %}
                                 </ul>
@@ -160,9 +161,10 @@
                             <ul>
                                 <h1 class="title">Education:</h1>
                                 {% for education in educations %}
-                                    <li>University name: {{education.university_name}}</li>
-                                    <li>Diploma: {{education.diploma_name}} - from {{education.start_year}} to {{education.end_year}}</li>
-                                    <li>Description: {{education.description|linebreaks}}</li>
+                                    <li><strong>University name</strong>: {{education.university_name}}</li>
+                                    <li><strong>Diploma</strong>: {{education.diploma_name}} - from {{education.start_year}} to {{education.end_year}}</li>
+                                    <li><strong>Description</strong>:</li>
+                                    <li class="description"><pre>{{education.description|linebreaksbr}}</pre></li>
                                     <br>
                                 {% endfor %}
                             </ul>
@@ -194,7 +196,11 @@
                         <div class="col">
                             <div class="contact-info">
                                 <h2>Find me <i class="uil uil-corner-right-down"></i></h2>
-                                <p><i class="uil uil-envelope">Test@gmail.com</i></p>
+                                {% for contact in contacts %}
+                                    {% if contact.type_of_contact|lower == "email" %}
+                                        <p><i class="uil uil-envelope">{{contact.description}}</i></p>
+                                    {% endif %}
+                                {% endfor %}
                             </div>
                         </div>
                         <div class="col">
@@ -226,9 +232,6 @@
                             <a href="#about">About</a>
                         </li>
                         <li class="footer_menu_list">
-                            <a href="#projects">Projets</a>
-                        </li>
-                        <li class="footer_menu_list">
                             <a href="#contact">Contact</a>
                         </li>
                     </ul>
@@ -244,5 +247,8 @@
                 </div>
             </footer>
         </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.1.0/typed.umd.js"></script>
+        <script src="{% static 'script.js' %}"></script>
     </body>
 </html>

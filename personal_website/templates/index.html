@@ -65,22 +65,30 @@
                             <p>My name is Alexandre! I'm a developer specializing in Python and Django.</p>
                         </div>
                         <div class="text-btn">
-                            <button class="btn hire-btn">Hire me</button>
-                            <button class="btn">Download CV<i class="uil uil-file"></i></button>
+                            <!-- <button class="btn hire-btn">Hire me</button> -->
+                            <a href="{% url 'developer:download_file' %}"><button class="btn">Download CV<i class="uil uil-file"></i></button></a>
                         </div>
                         <div class="social_icons">
                             <div class="icon_circle"></div>
                             {% for contact in contacts %}
                                 {% if contact.type_of_contact|lower == "email" %}
+                                <a href="mailto: {{ contact.description }}">
                                     <div class="icon"><i class="uil uil-envelope-alt"></i></div>
-
+                                </a>
+                                
                                 {% elif contact.type_of_contact|lower == "github" %}
+                                <a href="{{ contact.description }}" target="_blank">
                                     <div class="icon"><i class="uil uil-github-alt"></i></div>
+                                </a>
 
                                 {% elif contact.type_of_contact|lower == "linkedin" %}
-                                    <div class="icon"><i class="uil uil-linkedin-alt"></i></div>
+                                    <a href="{{ contact.description }}" target="_blank">
+                                        <div class="icon"><i class="uil uil-linkedin-alt"></i></div>
+                                    </a>
                                 {% else %}
-                                    <div class="icon"><i class="uil uil-spinner"></i></div>
+                                    <a href="{{ contact.description }}" target="_blank">
+                                        <div class="icon"><i class="uil uil-spinner"></i></div>
+                                    </a>
                                 {% endif %}
                             {% endfor %}
                         
@@ -106,7 +114,13 @@
                                     <h2>{{developer.role}}</h2>
                                     <p>{{developer.intro}}</p>
                                 </figure>
-                                <button class="about-me-btn">Hire me</button>
+                                {% for contact in contacts %}
+                                    {% if contact.type_of_contact|lower == "email" %}
+                                        <a href="mailto: {{ contact.description }}">
+                                            <button class="about-me-btn">Hire me</button>
+                                        </a>
+                                    {% endif %}
+                                {% endfor %}
                             </div>
                         </div>
                         <div class="skill">

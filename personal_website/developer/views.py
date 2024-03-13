@@ -3,7 +3,7 @@ Module containing Django views for the developer app.
 
 Functions:
     index
-
+    download_file
 """
 
 
@@ -17,6 +17,11 @@ from resume.models import Contact,\
                           Personal_skill,\
                           Interest,\
                           Language
+
+import mimetypes
+from urllib.request import urlopen
+from django.conf import settings
+from django.http import FileResponse
 
 
 def index(request: HttpRequest) -> HttpResponse:
@@ -52,3 +57,27 @@ def index(request: HttpRequest) -> HttpResponse:
         }
 
     return render(request, 'index.html', context=context)
+
+def download_file(request: HttpRequest) -> FileResponse:
+    """
+    Download a file from the server.
+
+    Parameters:
+        request (HttpRequest): The HTTP request object
+
+    Returns:
+        FileResponse: The response containing the file to download.
+
+    """
+
+    developer = Developer.objects.first()
+    fl_path = developer.cv_file.path
+    filename = "Alexandre_Kolobov_CV"
+   
+    mime_type, _ = mimetypes.guess_type(fl_path)
+
+    return FileResponse(open(fl_path,'rb'),
+                        filename=filename,
+                        as_attachment=True,
+                        content_type=mime_type,
+                        )

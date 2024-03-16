@@ -28,7 +28,9 @@ var typingEffect = new Typed(".typedText", {
     backDelay: 2000,
 }) 
 
-/*---Scroll Animation---*/ 
+/*---Scroll Animation---*/
+var screenWidth = window.innerWidth;
+
 const sr = ScrollReveal({
     origin: "top",
     distance: "80px",
@@ -36,37 +38,39 @@ const sr = ScrollReveal({
     reset: true,
 })
 
-sr.reveal(".featured-name", { delay: 100 });
-sr.reveal(".text-info", { delay: 200 });
-sr.reveal(".text-btn", { delay: 200 });
-sr.reveal(".social_icons", { delay: 200 });
-sr.reveal(".featured-image", { delay: 320 });
+if (screenWidth >= 1024) {
 
-sr.reveal(".top-header", {});
+    sr.reveal(".featured-name", { delay: 100 });
+    sr.reveal(".text-info", { delay: 200 });
+    sr.reveal(".text-btn", { delay: 200 });
+    sr.reveal(".social_icons", { delay: 200 });
+    sr.reveal(".featured-image", { delay: 320 });
+
+    sr.reveal(".top-header", {});
 
 
-const srLeft = ScrollReveal({
-    origin: "left",
-    distance: "80px",
-    duration: 2000,
-    reset: true,
-})
+    const srLeft = ScrollReveal({
+        origin: "left",
+        distance: "80px",
+        duration: 2000,
+        reset: true,
+    })
 
-srLeft.reveal(".about-info", { delay: 100 });
-srLeft.reveal(".experience", { delay: 100 });
-srLeft.reveal(".contact-info", { delay: 100 });
+    srLeft.reveal(".about-info", { delay: 100 });
+    srLeft.reveal(".experience", { delay: 100 });
+    srLeft.reveal(".contact-info", { delay: 100 });
 
-const srRight = ScrollReveal({
-    origin: "right",
-    distance: "80px",
-    duration: 2000,
-    reset: true,
-})
+    const srRight = ScrollReveal({
+        origin: "right",
+        distance: "80px",
+        duration: 2000,
+        reset: true,
+    })
 
-srRight.reveal(".skill-box", { delay: 100 });
-srRight.reveal(".education", { delay: 100 });
-srRight.reveal(".form-control", { delay: 100 });
-
+    srRight.reveal(".skill-box", { delay: 100 });
+    srRight.reveal(".education", { delay: 100 });
+    srRight.reveal(".form-control", { delay: 100 });
+}
 
 /*---Active Link---*/
 const sections = document.querySelectorAll(".section[id]")

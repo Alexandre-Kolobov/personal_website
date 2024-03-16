@@ -52,6 +52,15 @@
             <main class="wrapper">
                 <section class="featured-box section" id="home">
                     <div class="featured-text">
+                        <div class="messages">
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="alert">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
                         <div class="hello">
                             <h1>Hello I'm</h1>
                             <!-- <p>Web developer</p> -->
@@ -214,19 +223,63 @@
                             </div>
                         </div>
                         <div class="col">
-                            <div class="form-control">
-                                <div class="form-inputs">
-                                    <input type="text" class="input-field" placeholder="Your name">
-                                    <input type="text" class="input-field" placeholder="Your email">
+                            <form method="post">
+                                <div class="form-control">
+                                    {% csrf_token %}
+                                    <div class="form-inputs">
+
+                                        {% if form.email_address.errors %}
+                                            <script>
+                                                window.onload = function() {
+                                                    document.querySelector('.form-control').scrollIntoView();
+                                                }
+                                            </script>
+                                        {% endif %}
+
+                                        {% if form.name.errors %}
+                                            <input type="text" name="name" class="input-field error-field" placeholder="Your name" value="{{ request.POST.name }}">
+                                            {% for error in form.name.errors %}
+                                                <p class="error">{{ error }}</p>
+                                            {% endfor %}
+                                        {% else %}
+                                            <input type="text" name="name" class="input-field" placeholder="Your name" value="{{ request.POST.name }}">
+                                        {% endif %}
+
+                                        {% if form.email_address.errors %}
+                                        <input type="text"name="email_address" class="input-field error-field" placeholder="Your email" placeholder="Your email" value="{{ request.POST.email_address }}">
+                                            {% for error in form.email_address.errors %}
+                                                <p class="error">{{ error }}</p>
+                                            {% endfor %}
+                                        {% else %}
+                                            <input type="text" name="email_address" class="input-field" placeholder="Your email" value="{{ request.POST.email_address }}">
+                                        {% endif %}
+          
+                                    </div>
+                                    <div class="text-area">
+                                        {% if form.subject.errors %}
+                                        <input type="text" name="subject" class="input-subject error-field" placeholder="Subject" value="{{ request.POST.subject }}">
+                                            {% for error in form.subject.errors %}
+                                                <p class="error">{{ error }}</p>
+                                            {% endfor %}
+                                        {% else %}
+                                            <input type="text" name="subject" class="input-subject" placeholder="Subject" value="{{ request.POST.subject }}">
+                                        {% endif %}
+
+
+                                        {% if form.message.errors %}
+                                        <textarea name="message" class="error-field" placeholder="Message" value="{{ request.POST.message }}"></textarea>
+                                            {% for error in form.message.errors %}
+                                                <p class="error">{{ error }}</p>
+                                            {% endfor %}
+                                        {% else %}
+                                            <textarea name="message" placeholder="Message">{{ request.POST.message }}</textarea>
+                                        {% endif %}
+                                    </div>
+                                    <div class="form-button">
+                                        <button class="btn">Send <i class="uil uil-message"></i></button>
+                                    </div>
                                 </div>
-                                <div class="text-area">
-                                    <input type="text" class="input-subject" placeholder="Subject">
-                                    <textarea placeholder="Message"></textarea>
-                                </div>
-                                <div class="form-button">
-                                    <button class="btn">Send <i class="uil uil-message"></i></button>
-                                </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </section>
@@ -248,10 +301,31 @@
                     </ul>
                 </div>
                 <div class="footer-social-icons">
-                    <div class="icon_circle"></div>
-                    <div class="icon"><i class="uil uil-linkedin-alt"></i></div>
+                    <!-- <div class="icon_circle"> -->
+                    <!-- <div class="icon"><i class="uil uil-linkedin-alt"></i></div>
                     <div class="icon"><i class="uil uil-github-alt"></i></div>
-                    <div class="icon"><i class="uil uil-envelope-alt"></i></div>
+                    <div class="icon"><i class="uil uil-envelope-alt"></i></div> -->
+                    {% for contact in contacts %}
+                        {% if contact.type_of_contact|lower == "email" %}
+                        <a href="mailto: {{ contact.description }}">
+                            <div class="icon"><i class="uil uil-envelope-alt"></i></div>
+                        </a>
+                        
+                        {% elif contact.type_of_contact|lower == "github" %}
+                        <a href="{{ contact.description }}" target="_blank">
+                            <div class="icon"><i class="uil uil-github-alt"></i></div>
+                        </a>
+
+                        {% elif contact.type_of_contact|lower == "linkedin" %}
+                            <a href="{{ contact.description }}" target="_blank">
+                                <div class="icon"><i class="uil uil-linkedin-alt"></i></div>
+                            </a>
+                        {% else %}
+                            <a href="{{ contact.description }}" target="_blank">
+                                <div class="icon"><i class="uil uil-spinner"></i></div>
+                            </a>
+                        {% endif %}
+                    {% endfor %}
                 </div>
                 <div class="bottom-footer">
                     <p>&copy; 2024 {{developer.first_name}} {{developer.last_name}}</p>

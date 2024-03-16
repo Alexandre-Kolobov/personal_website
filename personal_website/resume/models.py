@@ -94,7 +94,6 @@ class Technical_skill(models.Model):
         return (f'{self.developer.first_name} {self.developer.last_name}: {self.name}')
 
 
-
 class Education(models.Model):
     """
     A class to represent education of developer.
@@ -148,8 +147,6 @@ class Personal_skill(models.Model):
 
     def __str__(self):
         return (f'{self.developer.first_name} {self.developer.last_name}: {self.name}')
-
-
 
 
 class Interest(models.Model):

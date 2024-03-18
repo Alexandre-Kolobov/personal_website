@@ -2,3 +2,5 @@
 /specifications
 /__pycache__
 .env
+Amazon_keys.pem
+nohup.out

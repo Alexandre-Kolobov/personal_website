@@ -59,10 +59,10 @@ def index(request: HttpRequest) -> HttpResponse:
                 'message': form.cleaned_data['message'],
             }
 
-            message = f"Émetteur du message: {body["name"]}\n" \
-                      f"Email d'émetteur: {body["email"]}\n" \
-                      f"Subject: {body["subject"]}\n" \
-                      f"Message: {body["message"]}\n" \
+            message = f"Émetteur du message: {body['name']}\n" \
+                      f"Email d'émetteur: {body['email']}\n" \
+                      f"Subject: {body['subject']}\n" \
+                      f"Message: {body['message']}\n" \
 
             send_mail(
                 subject,

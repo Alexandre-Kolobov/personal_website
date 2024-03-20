@@ -7,4 +7,4 @@ Amazon_keys.pem
 nohup.out
 db.sqlite3
 
-/uploads/
+/uploads

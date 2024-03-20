@@ -5,3 +5,4 @@ __pycache__/
 .env
 Amazon_keys.pem
 nohup.out
+db.sqlite3

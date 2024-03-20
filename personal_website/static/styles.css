@@ -809,3 +809,31 @@ footer {
         margin-left: 50%;
     }
 }
+
+/* ---media query = 540px--- */
+@media only screen and (max-width: 540px) {
+    .featured-name {
+        font-size: 40px;
+    }
+
+    .featured-image{
+        display: none;
+    }
+
+
+    .project-box {
+        width: 100%;
+    }
+
+    .form-inputs {
+        flex-direction: column;
+    }
+
+    .input-field {
+        width: 100%;
+    }
+
+    .mode {
+        margin-left: 50%;
+    }
+}

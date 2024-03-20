@@ -1,6 +1,7 @@
 /venv
 /specifications
 /__pycache__
+__pycache__/
 .env
 Amazon_keys.pem
 nohup.out
